@@ -98,7 +98,7 @@ def click():
 # csv + image
 if __name__ == '__main__':
     app.run(debug=True)
-
+vidgbui fiugfwe
 
 
 # git add .
