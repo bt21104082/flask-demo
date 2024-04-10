@@ -65,16 +65,10 @@ def calculate_csv():
     result = df
     return result.to_json()
 
-
-@app.route('/images/<path:filename>')
-def get_image(filename):
-    return send_from_directory('static/images', filename)
-
 @app.route('/upload', methods=['POST'])
 def upload_file():
     if 'filename' not in request.files:
         return jsonify({'error': 'No file uploaded'}), 400
-
     file = request.files['filename']
 
     if file.filename == '':
@@ -84,11 +78,29 @@ def upload_file():
     print("file path is ", file_path)
     file.save(file_path)
 
-    with open(file_path, 'rb') as f:
+    new_file_path = '/home/virendra/ss.png'
+
+    with open(new_file_path, 'rb') as f:
         image_data = base64.b64encode(f.read()).decode('utf-8')
 
-    return jsonify({'message': 'File uploaded successfully', 'image_data': image_data}), 200
+    csv_file = pd.read_csv('data.csv')
+    csv_file = csv_file.to_json()
+    print(csv_file)
+    # return render_template('index2.html', csv_data=csv_file)
 
+    return jsonify({'message': 'File uploaded successfully', 'image_data': image_data, 'html_template'}), 200
 
+@app.route('/csv', methods=['GET'])
+def click():
+    csv_file = pd.read_csv('data.csv')
+    return render_template(csv_file)
+
+# csv + image
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+
+# git add .
+# git commit -m "index added"
+# git push -u origin master
