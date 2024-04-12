@@ -34,8 +34,8 @@ uploadForm.addEventListener('submit', function(event) {
             console.log("File uploaded successfully");
             response.json().then(data => {
                 // console.log(data.image_data); // Log image_data property
-                // console.log(data); // Log the entire response data
-                document.getElementById('text').innerHTML = data.image_data;
+                console.log(data); // Log the entire response data
+                document.getElementById('text').innerHTML = data.csv_file;
                 var uploadedImage = document.getElementById('previewImage');
                 uploadedImage.src = 'data:image/png;base64,' + data.image_data;
                 uploadedImage.alt = 'Uploaded Image';
