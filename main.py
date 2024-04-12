@@ -32,7 +32,6 @@ def receive_multiple():
         error_message = 'Internal server error: ' + str(e)
         return error_message, 500
 
-
 @app.route('/output-csv', methods=['GET'])
 def receive_csv():
     try:
@@ -88,7 +87,7 @@ def upload_file():
     print(csv_file)
     # return render_template('index2.html', csv_data=csv_file)
 
-    return jsonify({'message': 'File uploaded successfully', 'image_data': image_data, 'html_template'}), 200
+    return jsonify({'message': 'File uploaded successfully', 'image_data' : image_data, 'csv_file' : csv_file}), 200
 
 @app.route('/csv', methods=['GET'])
 def click():
